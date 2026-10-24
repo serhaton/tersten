@@ -5,8 +5,8 @@ import { isRunningInExpoGo } from 'expo';
 // Your real AdMob ad unit IDs go here (AdMob console > Apps > Ad units).
 // Debug builds always use Google's test ads, so you never click your own real ads.
 const AD_UNITS = {
-  banner: Platform.select({ ios: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx', default: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx' }),
-  interstitial: Platform.select({ ios: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx', default: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx' }),
+  banner: Platform.select({ ios: 'ca-app-pub-4475107857161348/5488945951', default: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx' }),
+  interstitial: Platform.select({ ios: 'ca-app-pub-4475107857161348/6362421808', default: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx' }),
 };
 
 /** A full-screen ad after every this many finished rounds. */
