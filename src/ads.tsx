@@ -54,6 +54,8 @@ export function AdsProvider({ children }: { children: ReactNode }) {
         canRequest = info.canRequestAds;
       } catch {}
       if (!canRequest) return;
+      // Family party game: only ads suitable for general audiences with parental guidance.
+      await ads.default().setRequestConfiguration({ maxAdContentRating: ads.MaxAdContentRating.PG });
       await ads.default().initialize();
       setReady(true);
     })().catch(() => {});

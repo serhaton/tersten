@@ -64,7 +64,6 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
   const [revealed, setRevealed] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [heardRev, setHeardRev] = useState(false);
-  const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const busy = useRef(false);
   /** Permission and recording mode are set up when the game opens, so Record starts instantly. */
@@ -74,7 +73,9 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
 
   const recorder = useAudioRecorder(REC_OPTIONS);
 
-  const player = useAudioPlayer(null);
+  // Without keepAudioSessionActive, pause() shuts the audio session down 100 ms later
+  // unless something is already playing, so a recording that loaded slowly played silently.
+  const player = useAudioPlayer(null, { keepAudioSessionActive: true });
   const status = useAudioPlayerStatus(player);
 
   function setUpRecording() {
@@ -92,7 +93,6 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
     setUpRecording();
     return () => {
       setAudioModeAsync({ playsInSilentMode: true, allowsRecording: false });
-      if (revealTimer.current) clearTimeout(revealTimer.current);
       deleteFiles(Object.values(soundsRef.current));
     };
     // Set up once when the game opens.
@@ -141,7 +141,6 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
     try {
       await recorder.stop();
       uri = recorder.uri;
-      tap();
       if (!uri) throw new Error('No recording');
       const wav = await readWav(uri);
       const sr = wav.sampleRate;
@@ -180,17 +179,14 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
     setRevealed(true);
     ads.roundFinished();
     setPlaying('orig');
-    const fanfare = sfx.win(concept.id);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    // Play player 1's voice once the fanfare is over.
-    const uri = sounds.orig;
-    revealTimer.current = setTimeout(() => { player.replace({ uri }); player.play(); }, fanfare ? 1300 : 0);
+    player.replace({ uri: sounds.orig });
+    player.play();
   }
 
   function newGame() {
     ads.beforeNextRound();
     if (recording) { recorder.stop().catch(() => {}); setRecording(null); }
-    if (revealTimer.current) clearTimeout(revealTimer.current);
     player.pause();
     sfx.whoosh();
     deleteFiles(Object.values(sounds));

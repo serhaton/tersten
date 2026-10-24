@@ -74,27 +74,60 @@ Replace the placeholder with your name or company name, as it should appear on t
 
 ## App Review information – Notes (max 4000)
 
-App Review notes are not localized; this English text is the one to submit.
-
 ```
-Thank you for reviewing Backwards.
+Thank you for reviewing Say It Backwards ("Backwards" on the Home Screen in English, "Tersten" in Turkish).
 
-No account or login is needed, and there are no in-app purchases.
+WHAT THE APP IS
+A two-player party game for teens and adults (friends, family game nights). Player 1 records a secret word; player 2 hears it played backwards, imitates it, and the app reverses the imitation so both can guess the word. It is not designed for children and is not submitted to the Kids category.
+
+NO ACCOUNT, NO PURCHASES
+No login, registration or account. No in-app purchases or subscriptions. No user-generated content is shared with other users. The app contains no links that leave the app; the only way to leave is tapping an ad.
 
 HOW TO TEST (one person can play both roles)
-1. On the home screen, tap any theme, for example "Footballers".
-2. The app asks for microphone access. Please allow it; recording is the core of the game.
-3. Player 1: optionally tap "Suggest a word", then tap "Record", say a word, and tap "Stop".
-4. Player 2: tap "Play Backwards" to hear the word in reverse, tap "Record" and imitate the sound, then tap "Stop".
-5. Tap "Listen": the app reverses the imitation so it sounds close to the original word.
-6. Tap "Show the answer" to hear the original recording and see the suggested word.
-7. Tap "New game" to play again. The gear button opens Settings (language: English/Turkish, app sounds on/off).
+1. Tap any theme on the home screen, e.g. "Footballers".
+2. Allow microphone access when asked; recording is the core of the game.
+3. Player 1: optionally tap "Suggest a word", tap "Record", say a word, tap "Stop".
+4. Player 2: tap "Play Backwards", then "Record", imitate the sound, tap "Stop".
+5. Tap "Listen": the app reverses the imitation so it sounds like the original word.
+6. Tap "Show the answer" to hear the original and see the word.
+7. Tap "New game" to play again. The gear button opens Settings (English/Turkish, app sounds on/off).
 
-MICROPHONE AND PRIVACY
-The microphone is used only while the user taps Record. Recordings are processed entirely on the device (reversed and played back), are stored temporarily in the app's private cache, and are deleted when a new game starts or the game screen is closed. No audio is uploaded or shared. Settings (language, sound on/off) are stored locally on the device.
+PERMISSIONS
+Only the microphone, requested the first time a theme is opened. The app does not request App Tracking Transparency, location, contacts, camera or photos.
 
-ADVERTISING
-The app shows Google AdMob ads: a banner at the bottom of the game screen and an interstitial after every second finished round, shown when the next round starts. In the EEA, the UK and Switzerland, Google's consent form (UMP) is shown before ads are requested. The app does not request App Tracking Transparency permission and does not access the IDFA.
+DATA AND PRIVACY
+- Recordings are processed only on the device, kept temporarily in the app's private cache, and deleted when a new game starts or the game screen closes. No audio is uploaded or shared.
+- Settings (language, sounds) are stored locally.
+- No third-party analytics SDK. We do not collect, store or share any user data ourselves, and have no server.
 
-The privacy policy is available on the support website linked in this submission.
+THIRD-PARTY SERVICES
+- Google AdMob (Google Mobile Ads SDK): a banner on the game screen and an interstitial after every second finished round. Ad content is limited to the PG rating (family-friendly). Google may collect device information, IP address (coarse location), ad interactions and diagnostics to serve and measure ads, as described in our privacy policy and the App Privacy section. The IDFA is not accessed.
+- Google User Messaging Platform: consent form for ads in the EEA, the UK and Switzerland.
+No other external services, data providers, authentication, payment or AI services are used.
+
+REGIONAL DIFFERENCES
+The app works the same in all regions. The only difference: in the EEA, the UK and Switzerland, Google's consent form is shown before ads load. Ads may not appear in every region or right away, because ad fill varies.
+
+LANGUAGES
+English and Turkish; the app follows the device language and can be switched in Settings.
+
+DEVICES
+Built for iPhone (iOS 16.4 or later); runs on iPad in iPhone compatibility mode.
+Tested on: iPhone 15 Pro simulator, iOS 26.0; iPhone 16 Pro simulator, iOS 26.2 ; iPhone 16 mini iOS 26.6.2
+
+No regulated content or protected third-party material: word suggestions such as footballer, celebrity or car brand names are used only as plain text guessing prompts, with no logos, photos or implied endorsement.
+
+Privacy policy: https://serhaton.github.io/tersten/privacy.html
+Support: https://serhaton.github.io/tersten/support.html
 ```
+
+## Submission checklist (from earlier review feedback)
+
+- **Category:** Primary *Games › Word* (or *Trivia*), secondary *Entertainment*. Do **not** choose the Kids category. Kids apps cannot show ads that link out of the app without a parental gate (Guideline 1.3).
+- **Age rating questionnaire:** answer "Yes" to advertising; do not mark the app as "Made for Kids".
+- **Name match (Guideline 2.3.8):** store name "Say It Backwards: Party Game" matches Home Screen "Backwards". Add the Turkish localization in App Store Connect too (name "Tersten: Ters Ses Oyunu" from tr.md), so Turkish users see a store name that matches "Tersten" on their Home Screen.
+- **Screen recording:** record on a real iPhone (Control Center › Screen Recording, turn the microphone on). Start from launching the app, show the microphone permission prompt, one full round (record, play backwards, imitate, listen, show answer), an ad, Settings, and the language switch. Attach it in App Review Information › Attachment.
+- **Contact info:** fill in name, phone and email (serhaton@gmail.com) in App Review Information. Leave "Sign-in required" unchecked.
+- **Privacy policy URL:** https://serhaton.github.io/tersten/privacy.html
+- **Support URL:** https://serhaton.github.io/tersten/support.html
+- **Marketing URL:** https://serhaton.github.io/tersten/ (also used by AdMob for app-ads.txt)

@@ -51,7 +51,16 @@
           ]
         }
       ],
-      "expo-asset"
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#1B1446"
+        }
+      ]
     ],
     "locales": {
       "tr": "./locales/tr.json",

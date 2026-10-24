@@ -1,5 +1,5 @@
 // Synthesizes the short themed button sounds into assets/sfx/*.wav.
-// Run with: node scripts/make-sfx.mjs
+// Run with: node scripts/make-sfx.mjs [name ...]
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const SR = 22050;
@@ -42,7 +42,11 @@ function concat(...parts) {
 }
 const silence = d => new Float32Array(Math.floor(d * SR));
 
+// Optional names to write only some sounds: node scripts/make-sfx.mjs whoosh
+const ONLY = process.argv.slice(2);
+
 function save(name, samples, gain = 0.8) {
+  if (ONLY.length && !ONLY.includes(name)) return;
   let peak = 0;
   for (const s of samples) peak = Math.max(peak, Math.abs(s));
   const k = peak ? gain / peak : 0;
@@ -126,10 +130,17 @@ save('futbol-win', concat(whistle(0.16), silence(0.07), whistle(0.16), silence(0
   save('diger-win', concat(note(523, 0.12), note(659, 0.12), note(784, 0.12), note(1047, 0.7)));
 }
 
-// Generic: soft whoosh for "new game".
+// Generic: soft descending two-note chime for "new game" and "back" (kept under the old name).
 {
-  const d = 0.35; let lp = 0;
-  save('whoosh', render(d, t => { lp += (0.05 + 0.4 * (t / d)) * (noise() - lp); return lp * Math.sin(Math.PI * t / d); }), 0.6);
+  const pluck = (f, d) => render(d, t =>
+    (sine(TAU * f * t) + 0.35 * sine(TAU * f * 2 * t) + 0.1 * sine(TAU * f * 3 * t)) * decay(t, 14) * env(t, d, 0.004, 0.04));
+  const high = pluck(784, 0.3), low = pluck(523, 0.32);
+  // The low note starts 90 ms in and rings over the tail of the high one.
+  const gap = Math.floor(0.09 * SR);
+  const mix = new Float32Array(gap + low.length);
+  mix.set(high.subarray(0, mix.length));
+  low.forEach((s, i) => { mix[gap + i] += s; });
+  save('whoosh', mix, 0.45);
 }
 
 console.log('sfx written');

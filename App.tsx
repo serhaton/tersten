@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts, Baloo2_500Medium, Baloo2_700Bold, Baloo2_800ExtraBold } from '@expo-google-fonts/baloo-2';
@@ -8,9 +9,17 @@ import { SettingsProvider } from './src/settings';
 import { AdsProvider } from './src/ads';
 import type { Concept } from './src/concepts';
 
+// Keep the splash up until the fonts are in, so there's no blank frame in between.
+SplashScreen.preventAutoHideAsync();
+SplashScreen.setOptions({ duration: 300, fade: true });
+
 export default function App() {
   const [concept, setConcept] = useState<Concept | null>(null);
   const [fontsLoaded] = useFonts({ Baloo2_500Medium, Baloo2_700Bold, Baloo2_800ExtraBold });
+
+  useEffect(() => {
+    if (fontsLoaded) SplashScreen.hide();
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
 
