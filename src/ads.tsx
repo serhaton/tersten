@@ -13,7 +13,8 @@ const AD_UNITS = {
 const ROUNDS_PER_INTERSTITIAL = 2;
 
 // Expo Go has no AdMob native code, so ads stay off there instead of crashing.
-const Ads: typeof import('react-native-google-mobile-ads') | null = isRunningInExpoGo()
+// EXPO_PUBLIC_NO_ADS=1 builds an ad-free copy for family devices (never set it for the store build).
+const Ads: typeof import('react-native-google-mobile-ads') | null = isRunningInExpoGo() || process.env.EXPO_PUBLIC_NO_ADS === '1'
   ? null
   // eslint-disable-next-line @typescript-eslint/no-require-imports -- must not load in Expo Go
   : require('react-native-google-mobile-ads');
