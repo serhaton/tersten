@@ -28,13 +28,15 @@ const unit = (key: keyof typeof AD_UNITS) => {
 
 type AdsApi = {
   enabled: boolean;
+  /** A full-screen ad is on screen right now. */
+  showing: boolean;
   /** Call once when a round ends (the answer is revealed). */
   roundFinished: () => void;
   /** Call before starting a new round; shows the full-screen ad when one is due. */
   beforeNextRound: () => void;
 };
 
-const AdsContext = createContext<AdsApi>({ enabled: false, roundFinished: () => {}, beforeNextRound: () => {} });
+const AdsContext = createContext<AdsApi>({ enabled: false, showing: false, roundFinished: () => {}, beforeNextRound: () => {} });
 
 const noInterstitial = () => ({ status: 'idle' as const, show: () => {}, load: () => {} });
 const useInterstitial = Ads ? Ads.useInterstitialAd : noInterstitial;
@@ -72,6 +74,7 @@ export function AdsProvider({ children }: { children: ReactNode }) {
 
   const api = useMemo<AdsApi>(() => ({
     enabled: ready,
+    showing: status === 'showing',
     roundFinished: () => {
       rounds.current += 1;
       if (rounds.current % ROUNDS_PER_INTERSTITIAL === 0) due.current = true;

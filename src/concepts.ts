@@ -39,7 +39,7 @@ export const CONCEPTS: Concept[] = [
     words: {
       tr: [
         ...WORLD_FOOTBALLERS, 'Arda Güler', 'Kenan Yıldız', 'Hakan Çalhanoğlu', 'Mauro Icardi', 'Victor Osimhen',
-        'Gheorghe Hagi', 'Alex de Souza', 'Rüştü Reçber', 'Hakan Şükür', 'Arda Turan', 'Ferdi Kadıoğlu', 'Fernando Muslera',
+        'Gheorghe Hagi', 'Alex de Souza', 'Rüştü Reçber', 'Burak Yılmaz', 'Arda Turan', 'Ferdi Kadıoğlu', 'Fernando Muslera',
       ],
       en: WORLD_FOOTBALLERS,
     },

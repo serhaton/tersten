@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { Modal, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
+import { Linking, Modal, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import type { Lang } from './i18n';
 import { useSettings } from './settings';
 import { font, ink } from './ui';
+
+const PRIVACY_URL: Record<Lang, string> = {
+  tr: 'https://serhaton.com/tersten/1.1/tr/privacy.html',
+  en: 'https://serhaton.com/tersten/1.1/en/privacy.html',
+};
 
 const LANGS: { id: Lang; label: string }[] = [
   { id: 'tr', label: '🇹🇷  Türkçe' },
@@ -31,7 +36,8 @@ export default function SettingsButton({ accent }: { accent: string }) {
 function SettingsSheet({ open, onClose, accent }: { open: boolean; onClose: () => void; accent: string }) {
   const { t, lang, setLang, sound, setSound } = useSettings();
   return (
-    <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}
+      supportedOrientations={['portrait', 'portrait-upside-down', 'landscape-left', 'landscape-right']}>
       <Pressable style={styles.backdrop} onPress={onClose}>
         <Pressable style={styles.sheet} onPress={() => {}}>
           <Text style={styles.title}>⚙️ {t.settings}</Text>
@@ -56,6 +62,10 @@ function SettingsSheet({ open, onClose, accent }: { open: boolean; onClose: () =
             </View>
             <Switch value={sound} onValueChange={v => { Haptics.selectionAsync(); setSound(v); }} trackColor={{ true: accent }} />
           </View>
+
+          <Pressable onPress={() => { Linking.openURL(PRIVACY_URL[lang]).catch(() => {}); }} style={styles.link} hitSlop={6} accessibilityRole="link">
+            <Text style={[styles.linkText, { color: accent }]}>{t.privacy} ↗</Text>
+          </Pressable>
 
           <Pressable onPress={onClose} style={[styles.done, { backgroundColor: accent }]} accessibilityRole="button">
             <Text style={styles.doneText}>{t.done}</Text>
@@ -82,6 +92,8 @@ const styles = StyleSheet.create({
   optionText: { fontFamily: font.bold, fontSize: 16, lineHeight: 24, color: ink },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 4 },
   rowSub: { fontFamily: font.medium, fontSize: 13, lineHeight: 18, color: '#5A6690' },
+  link: { alignSelf: 'flex-start', paddingVertical: 4 },
+  linkText: { fontFamily: font.bold, fontSize: 16, lineHeight: 24, textDecorationLine: 'underline' },
   done: { borderRadius: 16, paddingVertical: 10, alignItems: 'center', marginTop: 6 },
   doneText: { fontFamily: font.black, fontSize: 18, lineHeight: 26, color: '#fff' },
 });

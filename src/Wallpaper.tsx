@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
-import { Animated, Easing, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
+import { useSize } from './ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, G, Line, Path, Polygon, Rect } from 'react-native-svg';
 import type { ConceptId } from './concepts';
@@ -19,10 +20,10 @@ function rng(seed: number) {
 }
 
 export default function Wallpaper({ colors, stickers, theme = 'picker' }: Props) {
-  const { width: w, height: h } = useWindowDimensions();
+  const { width: w, height: h, onLayout } = useSize();
 
   return (
-    <View style={StyleSheet.absoluteFill} pointerEvents="none">
+    <View style={StyleSheet.absoluteFill} pointerEvents="none" onLayout={onLayout}>
       <LinearGradient colors={colors} style={StyleSheet.absoluteFill} start={{ x: 0.1, y: 0 }} end={{ x: 0.9, y: 1 }} />
       <Svg width={w} height={h} style={StyleSheet.absoluteFill}>
         <Decor theme={theme} w={w} h={h} />
