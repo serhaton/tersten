@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
-import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
-import { useSize } from './ui';
+import { Animated, Easing, StyleSheet, View } from 'react-native';
+import { Text, useSize } from './ui';
 import { LinearGradient } from 'expo-linear-gradient';
 import Svg, { Circle, G, Line, Path, Polygon, Rect } from 'react-native-svg';
 import type { ConceptId } from './concepts';
@@ -54,26 +54,33 @@ function Decor({ theme, w, h }: { theme: Props['theme']; w: number; h: number })
         </G>
       );
     }
-    case 'cadilar': {
-      const stars = Array.from({ length: 40 }, () => [rand() * w, rand() * h * 0.6, rand() * 1.8 + 0.6]);
+    case 'noel': {
+      // Falling snow, a big star, and snowy hills with pine trees.
+      const snow = Array.from({ length: 70 }, () => [rand() * w, rand() * h * 0.85, rand() * 2.6 + 1]);
+      const tree = (x: number, y: number, s: number) => (
+        <G key={`${x}`} fill="#0A2F2B" opacity={0.85}>
+          <Polygon points={`${x},${y - s * 2.2} ${x - s * 0.7},${y - s * 1.2} ${x + s * 0.7},${y - s * 1.2}`} />
+          <Polygon points={`${x},${y - s * 1.7} ${x - s * 0.95},${y - s * 0.55} ${x + s * 0.95},${y - s * 0.55}`} />
+          <Polygon points={`${x},${y - s * 1.1} ${x - s * 1.2},${y + s * 0.15} ${x + s * 1.2},${y + s * 0.15}`} />
+          <Rect x={x - s * 0.16} y={y + s * 0.15} width={s * 0.32} height={s * 0.4} />
+        </G>
+      );
       return (
         <G>
-          {stars.map(([x, y, r], i) => <Circle key={i} cx={x} cy={y} r={r} fill="#fff" opacity={0.7} />)}
-          <Circle cx={w * 0.78} cy={h * 0.13} r={w * 0.16} fill="#FFE9A8" opacity={0.95} />
-          <Circle cx={w * 0.72} cy={h * 0.11} r={w * 0.03} fill="#E8CF85" />
-          <Circle cx={w * 0.83} cy={h * 0.16} r={w * 0.02} fill="#E8CF85" />
-          {/* Spider web in the top-left corner */}
-          <G stroke="#fff" strokeWidth={1.5} opacity={0.35} fill="none">
-            {[0, 18, 36, 54, 72, 90].map(a => {
-              const r = (a * Math.PI) / 180;
-              return <Line key={a} x1={0} y1={0} x2={Math.cos(r) * w * 0.45} y2={Math.sin(r) * w * 0.45} />;
-            })}
-            {[0.12, 0.22, 0.32, 0.42].map(k => <Path key={k} d={`M ${w * k} 0 Q ${w * k * 0.75} ${w * k * 0.75} 0 ${w * k}`} />)}
-          </G>
-          {/* Hills with gravestones */}
-          <Path d={`M0 ${h * 0.86} Q ${w * 0.3} ${h * 0.78} ${w * 0.6} ${h * 0.85} T ${w} ${h * 0.82} V ${h} H 0 Z`} fill="#12052A" opacity={0.8} />
-          <Rect x={w * 0.18} y={h * 0.8} width={26} height={34} rx={12} fill="#12052A" opacity={0.8} />
-          <Rect x={w * 0.7} y={h * 0.79} width={22} height={30} rx={10} fill="#12052A" opacity={0.8} />
+          {snow.map(([x, y, r], i) => <Circle key={i} cx={x} cy={y} r={r} fill="#fff" opacity={0.75} />)}
+          <Circle cx={w * 0.13} cy={h * 0.235} r={w * 0.1} fill="#fff" opacity={0.08} />
+          <Polygon
+            points={Array.from({ length: 10 }, (_, i) => {
+              const a = (Math.PI / 5) * i - Math.PI / 2, r = (i % 2 ? 0.023 : 0.05) * w;
+              return `${w * 0.13 + Math.cos(a) * r},${h * 0.235 + Math.sin(a) * r}`;
+            }).join(' ')}
+            fill="#FFD76A" opacity={0.95}
+          />
+          {tree(w * 0.14, h * 0.84, w * 0.07)}
+          {tree(w * 0.86, h * 0.83, w * 0.085)}
+          {tree(w * 0.67, h * 0.86, w * 0.05)}
+          <Path d={`M0 ${h * 0.87} Q ${w * 0.3} ${h * 0.8} ${w * 0.6} ${h * 0.86} T ${w} ${h * 0.84} V ${h} H 0 Z`} fill="#fff" opacity={0.92} />
+          <Path d={`M0 ${h * 0.93} Q ${w * 0.4} ${h * 0.88} ${w} ${h * 0.94} V ${h} H 0 Z`} fill="#E6F0FA" opacity={0.95} />
         </G>
       );
     }

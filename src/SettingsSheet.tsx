@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Linking, Modal, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
+import { Linking, Modal, Pressable, StyleSheet, Switch, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import type { Lang } from './i18n';
 import { useSettings } from './settings';
-import { font, ink } from './ui';
+import { Text, font, ink } from './ui';
 
 const PRIVACY_URL: Record<Lang, string> = {
   tr: 'https://serhaton.com/tersten/1.1/tr/privacy.html',

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, type LayoutChangeEvent, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { Animated, Easing, type LayoutChangeEvent, Pressable, StyleSheet, Text as RNText, type TextProps, useWindowDimensions, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 
 export const font = {
@@ -9,6 +9,14 @@ export const font = {
 };
 
 export const ink = '#1D2B5C';
+
+/**
+ * Text that ignores the system text size. Every screen has fixed-height cards sized to the
+ * screen, so system scaling pushed text over the buttons and squeezed the theme cards.
+ */
+export function Text(props: TextProps) {
+  return <RNText allowFontScaling={false} {...props} />;
+}
 
 /**
  * Size of the view that gets `onLayout`, starting from the window size. Measured rather than

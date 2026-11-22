@@ -1,6 +1,6 @@
 import type { Lang } from './i18n';
 
-export type ConceptId = 'futbol' | 'cadilar' | 'unluler' | 'arabalar' | 'hayvanlar' | 'yemekler' | 'diger';
+export type ConceptId = 'futbol' | 'noel' | 'unluler' | 'arabalar' | 'hayvanlar' | 'yemekler' | 'diger';
 
 export type Concept = {
   id: ConceptId;
@@ -45,15 +45,15 @@ export const CONCEPTS: Concept[] = [
     },
   },
   {
-    id: 'cadilar',
-    title: { tr: 'Cadılar Bayramı', en: 'Halloween' },
-    emoji: '🎃',
-    colors: ['#1A0833', '#4B1679', '#E8641B'],
-    accent: '#7A2BC2',
-    stickers: ['🎃', '👻', '🦇', '🕸️', '🧙‍♀️', '💀', '🕷️', '🍬'],
+    id: 'noel',
+    title: { tr: 'Yılbaşı', en: 'Christmas' },
+    emoji: '🎄',
+    colors: ['#0B3B3C', '#0F5B4F', '#C2182B'],
+    accent: '#C2182B',
+    stickers: ['🎄', '🎅', '🎁', '⛄', '❄️', '🦌', '🔔', '🧦'],
     words: {
-      tr: ['Balkabağı', 'Hayalet', 'Vampir', 'Cadı', 'Süpürge', 'İskelet', 'Örümcek', 'Zombi', 'Mumya', 'Yarasa', 'Şeker', 'Kostüm', 'Kurt adam', 'Mezarlık', 'Kazan'],
-      en: ['Pumpkin', 'Ghost', 'Vampire', 'Witch', 'Broomstick', 'Skeleton', 'Spider', 'Zombie', 'Mummy', 'Bat', 'Candy', 'Costume', 'Werewolf', 'Graveyard', 'Cauldron'],
+      tr: ['Noel Baba', 'Ren geyiği', 'Kardan adam', 'Çam ağacı', 'Hediye', 'Kızak', 'Elf', 'Baca', 'Çorap', 'Kar tanesi', 'Baston şeker', 'Zencefilli kurabiye', 'Çıngırak', 'Kuzey Kutbu', 'Kartopu'],
+      en: ['Santa Claus', 'Reindeer', 'Snowman', 'Christmas tree', 'Present', 'Sleigh', 'Elf', 'Chimney', 'Stocking', 'Snowflake', 'Candy cane', 'Gingerbread', 'Jingle bells', 'North Pole', 'Snowball'],
     },
   },
   {
@@ -124,4 +124,4 @@ export const CONCEPTS: Concept[] = [
 
 /** Colors for the concept picker wallpaper. */
 export const PICKER_COLORS: [string, string, string] = ['#6B4BD8', '#E6306B', '#FFB224'];
-export const PICKER_STICKERS = ['⚽', '🎃', '⭐', '🏎️', '🦁', '🍕', '🎤', '👻'];
+export const PICKER_STICKERS = ['⚽', '🎄', '⭐', '🏎️', '🦁', '🍕', '🎤', '🎁'];

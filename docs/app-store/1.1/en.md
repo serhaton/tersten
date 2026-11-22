@@ -28,6 +28,8 @@ A simpler game, and now on iPad.
 • Recording starts the instant you tap, so the start of your word is no longer cut off
 • Your copy plays back automatically, flipped the right way round
 • Designed for iPad: a larger layout in portrait and landscape
+• New Christmas theme with sleigh bells and festive words (it replaces Halloween)
+• Text no longer overlaps the buttons when the system text size is set to large
 • Privacy policy link in Settings, and an updated privacy policy that covers iPad and explains the microphone indicator
 ```
 
@@ -53,7 +55,7 @@ HOW TO PLAY
 
 SEVEN THEMES
 • Footballers
-• Halloween
+• Christmas
 • Celebrities
 • Car Brands
 • Animals
@@ -66,7 +68,7 @@ FEATURES
 • Two players, one iPhone or iPad: no accounts, no sign-up
 • Instant recording: tap Record and start talking
 • English and Turkish, with word suggestions in the language you choose
-• Themed sounds, from a referee's whistle to a ghostly "wooo", which you can turn off in Settings
+• Themed sounds, from a referee's whistle to sleigh bells, which you can turn off in Settings
 • Your voice stays on your device: recordings are reversed on the device, never uploaded, and deleted when the game ends
 
 Perfect for game nights, family gatherings, road trips and parties.
@@ -107,7 +109,7 @@ NEW IN THE APP
 3. Recording starts at the moment of the tap (see MICROPHONE INDICATOR).
 4. Player 2's imitation plays back automatically after recording.
 5. "Privacy policy" link in Settings (gear button). It opens our policy in Safari and is the only link that leaves the app, apart from ads.
-6. One name changed in the Turkish footballers word list.
+6. A Christmas theme replaces Halloween; one name changed in the Turkish footballers list.
 
 CHANGED IN THE METADATA
 - Subtitle: "Reverse Audio Voice Challenge" (was "Hear it backwards, guess it!"); Turkish: "Ters Konuşma Taklit Yarışması".

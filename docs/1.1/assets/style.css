@@ -96,7 +96,7 @@ h2 { font-size: clamp(30px, 4vw, 40px); line-height: 1.15; margin: 0 0 12px; }
 .theme { border-radius: 20px; padding: 16px; color: #fff; font-weight: 800; font-size: 19px; min-height: 110px; display: flex; flex-direction: column; justify-content: space-between; }
 .theme span { font-size: 34px; line-height: 1; }
 .t-futbol { background: linear-gradient(135deg, #0FA34A, #05461F); }
-.t-cadilar { background: linear-gradient(135deg, #1A0833, #4B1679, #E8641B); }
+.t-noel { background: linear-gradient(135deg, #0B3B3C, #0F5B4F, #C2182B); }
 .t-unluler { background: linear-gradient(135deg, #FF3CAC, #784BA0, #2B86C5); }
 .t-arabalar { background: linear-gradient(135deg, #F2344B, #1B1B3A); }
 .t-hayvanlar { background: linear-gradient(135deg, #FFD23F, #B5501A); }

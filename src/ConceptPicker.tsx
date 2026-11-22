@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Animated, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Animated, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
@@ -7,7 +7,7 @@ import Wallpaper from './Wallpaper';
 import SettingsButton from './SettingsSheet';
 import { CONCEPTS, PICKER_COLORS, PICKER_STICKERS, type Concept } from './concepts';
 import { useSettings } from './settings';
-import { font, useSize } from './ui';
+import { Text, font, useSize } from './ui';
 import { sfx } from './sfx';
 
 export default function ConceptPicker({ onPick }: { onPick: (c: Concept) => void }) {

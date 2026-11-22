@@ -28,6 +28,8 @@ Daha sade bir oyun, artık iPad'de de.
 • Kayıt, dokunduğun anda başlar; kelimenin başı artık kesilmiyor
 • Taklidin, düze çevrilmiş olarak kendiliğinden çalar
 • iPad için tasarlandı: dikeyde ve yatayda daha büyük yerleşim
+• Yeni Yılbaşı teması: çıngırak sesleri ve yılbaşı kelimeleri (Cadılar Bayramı'nın yerine geldi)
+• Sistem yazı boyutu büyükken yazılar artık butonların üstüne binmiyor
 • Ayarlar'da gizlilik politikası bağlantısı; iPad'i ve mikrofon göstergesini de anlatan güncel gizlilik politikası
 ```
 
@@ -53,7 +55,7 @@ NASIL OYNANIR
 
 YEDİ KONSEPT
 • Futbolcular
-• Cadılar Bayramı
+• Yılbaşı
 • Ünlüler
 • Arabalar
 • Hayvanlar
@@ -66,7 +68,7 @@ Her konseptin kendi rengârenk duvar kağıdı, kendi ses efektleri ve kendi kel
 • İki oyuncu, tek iPhone ya da iPad: hesap yok, üyelik yok
 • Anında kayıt: Kaydet'e bas ve konuş
 • Türkçe ve İngilizce; kelime önerileri seçtiğin dilde
-• Hakem düdüğünden hayalet "uuu"suna temaya özel sesler; istersen Ayarlar'dan kapat
+• Hakem düdüğünden kızak çıngıraklarına temaya özel sesler; istersen Ayarlar'dan kapat
 • Sesin cihazında kalır: kayıtlar cihazda ters çevrilir, hiçbir yere yüklenmez ve oyun bitince silinir
 
 Oyun geceleri, aile buluşmaları, yolculuklar ve partiler için birebir.

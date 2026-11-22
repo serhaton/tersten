@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Animated, AppState, Keyboard, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Animated, AppState, Keyboard, Platform, Pressable, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 import {
@@ -19,7 +19,7 @@ import type { Concept } from './concepts';
 import { sfx } from './sfx';
 import { useSettings } from './settings';
 import { BannerSlot, useAds } from './ads';
-import { BigButton, Pill, font, ink, useSize } from './ui';
+import { BigButton, Pill, Text, font, ink, useSize } from './ui';
 import { deleteFiles, readWav, reversed, saveWav, trimSilence } from './wav';
 
 type Slot = 'p1' | 'p2';
@@ -387,6 +387,7 @@ export default function Game({ concept, onExit }: { concept: Concept; onExit: ()
                       placeholder={t.freeInput}
                       placeholderTextColor="#8A94B8"
                       secureTextEntry
+                      allowFontScaling={false}
                       autoCorrect={false}
                       returnKeyType="done"
                       style={[styles.input, { borderColor: accent }]}

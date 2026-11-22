@@ -67,30 +67,16 @@ const whistle = dur => {
 save('futbol-tap', whistle(0.22));
 save('futbol-win', concat(whistle(0.16), silence(0.07), whistle(0.16), silence(0.07), whistle(0.6)));
 
-// Halloween: wobbly ghost "wooo" and a descending spooky theremin.
+// Christmas: sleigh bells (bright, quickly decaying partials) and the start of a carol.
 {
-  const d = 0.5, o = osc(sine, t => 420 - 220 * (t / d) + 18 * Math.sin(TAU * 7 * t));
-  save('cadilar-tap', render(d, t => o(t) * env(t, d, 0.06, 0.2)));
-  const notes = [659, 622, 587, 554, 523, 392];
-  save('cadilar-win', concat(...notes.map((f, i) => {
-    const nd = i === notes.length - 1 ? 0.7 : 0.16, on = osc(sine, t => f + 10 * Math.sin(TAU * 6 * t));
-    return render(nd, t => (on(t) + 0.3 * square(TAU * f * t)) * env(t, nd, 0.01, 0.06) * (0.7 + 0.3 * Math.sin(TAU * 9 * t)));
-  })));
-}
-
-// Celebrities: sparkle chime and applause.
-{
-  const chime = (f, d) => render(d, t => (sine(TAU * f * t) + 0.4 * sine(TAU * f * 2 * t)) * decay(t, 14) * env(t, d, 0.002, 0.03));
-  save('unluler-tap', concat(chime(1568, 0.08), chime(2093, 0.22)));
-  const d = 1.4, claps = Array.from({ length: 70 }, () => [Math.random() * (d - 0.1), 0.6 + Math.random() * 0.4]);
-  let lp = 0;
-  save('unluler-win', render(d, t => {
-    let s = 0;
-    for (const [at, a] of claps) if (t >= at && t < at + 0.03) s += a * decay(t - at, 120);
-    const n = noise() * s;
-    lp += 0.5 * (n - lp); // soften the hiss a little
-    return (n - lp * 0.6) * env(t, d, 0.05, 0.4);
-  }));
+  const bell = (f, d) => render(d, t =>
+    (sine(TAU * f * t) + 0.6 * sine(TAU * f * 2.01 * t) + 0.45 * sine(TAU * f * 2.99 * t) + 0.25 * sine(TAU * f * 4.2 * t)) * decay(t, 9) * env(t, d, 0.002, 0.05));
+  const jingle = d => render(d, t =>
+    (sine(TAU * 3100 * t) + 0.8 * sine(TAU * 4150 * t) + 0.6 * sine(TAU * 5400 * t) + noise() * 0.15) * decay(t % 0.09, 38) * env(t, d, 0.002, 0.06));
+  save('noel-tap', concat(jingle(0.36)));
+  const E = 1319, G = 1568, C = 1047, D = 1175;
+  const tune = [[E, 0.16], [E, 0.16], [E, 0.3], [E, 0.16], [E, 0.16], [E, 0.3], [E, 0.16], [G, 0.16], [C, 0.2], [D, 0.12], [E, 0.7]];
+  save('noel-win', concat(...tune.map(([f, d]) => bell(f, d))));
 }
 
 // Car brands: double horn beep and an engine "vroom".
