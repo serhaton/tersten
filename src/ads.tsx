@@ -9,8 +9,8 @@ const AD_UNITS = {
   interstitial: Platform.select({ ios: 'ca-app-pub-4475107857161348/6362421808', default: 'ca-app-pub-xxxxxxxxxxxxxxxx/xxxxxxxxxx' }),
 };
 
-/** A full-screen ad after every this many finished rounds. */
-const ROUNDS_PER_INTERSTITIAL = 2;
+/** A full-screen ad after every this many finished rounds, so the first three rounds of a session have none. */
+const ROUNDS_PER_INTERSTITIAL = 3;
 
 // Expo Go has no AdMob native code, so ads stay off there instead of crashing.
 // EXPO_PUBLIC_NO_ADS=1 builds an ad-free copy for family devices (never set it for the store build).

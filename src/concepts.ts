@@ -1,6 +1,6 @@
 import type { Lang } from './i18n';
 
-export type ConceptId = 'futbol' | 'noel' | 'unluler' | 'arabalar' | 'hayvanlar' | 'yemekler' | 'diger';
+export type ConceptId = 'futbol' | 'noel' | 'unluler' | 'arabalar' | 'hayvanlar' | 'yemekler' | 'diger' | 'karisik';
 
 export type Concept = {
   id: ConceptId;
@@ -125,3 +125,16 @@ export const CONCEPTS: Concept[] = [
 /** Colors for the concept picker wallpaper. */
 export const PICKER_COLORS: [string, string, string] = ['#6B4BD8', '#E6306B', '#FFB224'];
 export const PICKER_STICKERS = ['⚽', '🎄', '⭐', '🏎️', '🦁', '🍕', '🎤', '🎁'];
+
+const allWords = (lang: Lang) => [...new Set(CONCEPTS.flatMap(c => c.words[lang]))];
+
+/** The default theme: the home screen wallpaper and word suggestions from every theme. */
+export const MIX: Concept = {
+  id: 'karisik',
+  title: { tr: 'Karışık', en: 'Mixed' },
+  emoji: '🎲',
+  colors: PICKER_COLORS,
+  accent: '#6B4BD8',
+  stickers: PICKER_STICKERS,
+  words: { tr: allWords('tr'), en: allWords('en') },
+};

@@ -10,6 +10,9 @@ type Settings = {
   t: Strings;
   setLang: (l: Lang) => void;
   setSound: (on: boolean) => void;
+  /** False until the one-time try-out has been finished or skipped; Settings can open it again. */
+  introSeen: boolean;
+  setIntroSeen: (seen: boolean) => void;
 };
 
 const KEY = 'tersten.settings';
@@ -20,6 +23,7 @@ const SettingsContext = createContext<Settings | null>(null);
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(deviceLang);
   const [sound, setSound] = useState(true);
+  const [introSeen, setIntroSeen] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -29,6 +33,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
         const saved = JSON.parse(raw);
         if (saved.lang === 'tr' || saved.lang === 'en') setLang(saved.lang);
         if (typeof saved.sound === 'boolean') setSound(saved.sound);
+        if (saved.introSeen === true) setIntroSeen(true);
       })
       .catch(() => {})
       .finally(() => setLoaded(true));
@@ -36,10 +41,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     sfx.setEnabled(sound);
-    if (loaded) AsyncStorage.setItem(KEY, JSON.stringify({ lang, sound })).catch(() => {});
-  }, [lang, sound, loaded]);
+    if (loaded) AsyncStorage.setItem(KEY, JSON.stringify({ lang, sound, introSeen })).catch(() => {});
+  }, [lang, sound, introSeen, loaded]);
 
-  const value = useMemo(() => ({ lang, sound, t: STRINGS[lang], setLang, setSound }), [lang, sound]);
+  const value = useMemo(() => ({ lang, sound, t: STRINGS[lang], setLang, setSound, introSeen, setIntroSeen }), [lang, sound, introSeen]);
   if (!loaded) return null;
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>;
 }

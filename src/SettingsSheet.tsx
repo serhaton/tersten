@@ -4,11 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import type { Lang } from './i18n';
 import { useSettings } from './settings';
+import { shotState } from './shot';
 import { Text, font, ink } from './ui';
 
 const PRIVACY_URL: Record<Lang, string> = {
-  tr: 'https://serhaton.com/tersten/1.1/tr/privacy.html',
-  en: 'https://serhaton.com/tersten/1.1/en/privacy.html',
+  tr: 'https://serhaton.com/tersten/1.2/tr/privacy.html',
+  en: 'https://serhaton.com/tersten/1.2/en/privacy.html',
 };
 
 const LANGS: { id: Lang; label: string }[] = [
@@ -18,7 +19,7 @@ const LANGS: { id: Lang; label: string }[] = [
 
 /** Gear button that opens the settings sheet. */
 export default function SettingsButton({ accent }: { accent: string }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(shotState.settingsOpen);
   const { t } = useSettings();
   return (
     <>
@@ -34,7 +35,7 @@ export default function SettingsButton({ accent }: { accent: string }) {
 }
 
 function SettingsSheet({ open, onClose, accent }: { open: boolean; onClose: () => void; accent: string }) {
-  const { t, lang, setLang, sound, setSound } = useSettings();
+  const { t, lang, setLang, sound, setSound, introSeen, setIntroSeen } = useSettings();
   return (
     <Modal visible={open} transparent animationType="fade" onRequestClose={onClose}
       supportedOrientations={['portrait', 'portrait-upside-down', 'landscape-left', 'landscape-right']}>
@@ -62,6 +63,17 @@ function SettingsSheet({ open, onClose, accent }: { open: boolean; onClose: () =
             </View>
             <Switch value={sound} onValueChange={v => { Haptics.selectionAsync(); setSound(v); }} trackColor={{ true: accent }} />
           </View>
+
+          {/* Not while the try-out itself is open. */}
+          {introSeen && (
+            <Pressable onPress={() => { Haptics.selectionAsync(); onClose(); setIntroSeen(false); }} style={styles.row} accessibilityRole="button" accessibilityLabel={t.howTo}>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.label}>❓ {t.howTo}</Text>
+                <Text style={styles.rowSub}>{t.howToSub}</Text>
+              </View>
+              <Text style={[styles.label, { color: accent }]}>›</Text>
+            </Pressable>
+          )}
 
           <Pressable onPress={() => { Linking.openURL(PRIVACY_URL[lang]).catch(() => {}); }} style={styles.link} hitSlop={6} accessibilityRole="link">
             <Text style={[styles.linkText, { color: accent }]}>{t.privacy} ↗</Text>

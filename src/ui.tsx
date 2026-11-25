@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, type LayoutChangeEvent, Pressable, StyleSheet, Text as RNText, type TextProps, useWindowDimensions, View } from 'react-native';
+import { Animated, Easing, type LayoutChangeEvent, Pressable, type StyleProp, StyleSheet, Text as RNText, type TextProps, useWindowDimensions, View, type ViewStyle } from 'react-native';
 import * as Haptics from 'expo-haptics';
 
 export const font = {
@@ -113,7 +113,38 @@ export function Pill({ label, color, onPress, active, scale: k = 1 }: { label: s
   );
 }
 
+type ButtonProps = {
+  label: string;
+  color: string;
+  onPress: () => void;
+  /** White with a coloured border instead of filled. */
+  outline?: boolean;
+  /** Text colour on a filled button, for fills too light for white. */
+  textColor?: string;
+  height?: number;
+  scale?: number;
+  style?: StyleProp<ViewStyle>;
+};
+
+/** A wide rectangular button, for screens that offer a choice instead of one round action. */
+export function Button({ label, color, onPress, outline, textColor = '#fff', height = 56, scale: k = 1, style }: ButtonProps) {
+  const big = height >= 64;
+  return (
+    <Pressable
+      onPress={() => { Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); onPress(); }}
+      style={({ pressed }) => [styles.btn, { height: height * k, borderRadius: (big ? 22 : 18) * k, borderColor: color, backgroundColor: outline ? '#fff' : color }, pressed && styles.pressed, style]}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+    >
+      <Text style={[styles.btnText, { color: outline ? color : textColor, fontSize: (big ? 26 : 19) * k, lineHeight: (big ? 36 : 28) * k }]} numberOfLines={1} adjustsFontSizeToFit>{label}</Text>
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
+  btn: { borderWidth: 2, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 12 },
+  btnText: { fontFamily: font.black, textAlign: 'center' },
+  pressed: { opacity: 0.75 },
   big: { alignItems: 'center', gap: 6, alignSelf: 'center', paddingHorizontal: 12 },
   off: { opacity: 0.3 },
   halo: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 },

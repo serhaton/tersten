@@ -41,6 +41,7 @@ export const sfx = {
     enabled = on;
     if (!on) players.forEach(p => p.pause());
   },
-  tap: (id: ConceptId, volume?: number) => play(`${id}-tap`, volume),
+  // The mixed theme has no sound of its own.
+  tap: (id: ConceptId, volume?: number) => play(`${id === 'karisik' ? 'diger' : id}-tap`, volume),
   whoosh: () => play('whoosh', 0.6),
 };

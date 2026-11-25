@@ -43,3 +43,6 @@ yarn-error.*
 # local EAS builds
 /build
 *.ipa
+
+# python
+__pycache__/
